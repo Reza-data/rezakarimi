@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ادیت ویدیو با Claude · راهنمای کامل | Reza Karimi</title>
+<meta name="description" content="راهنمای فارسی و قدم‌به‌قدم ساختن یه استودیوی ادیت ویدیو با Claude، با سه پرامپت آماده">
+<meta property="og:title" content="ادیت ویدیو با Claude · راهنمای کامل"><meta property="og:image" content="avatar.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net"><link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<style>
+:root{--blue:#3B6FE0;--ink:#151515;--mut:#6b6b6b;--line:#ECECE6;--bg:#F7F7F4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);background:var(--bg);background-image:linear-gradient(rgba(20,20,40,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(20,20,40,.045) 1px,transparent 1px);background-size:28px 28px;line-height:1.9}
+.wrap{max-width:760px;margin:0 auto;padding:22px 16px 60px}
+header{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:12px 14px;box-shadow:0 8px 24px rgba(20,20,50,.06)}
+header img{width:56px;height:56px;border-radius:50%;background:#EEF3FD}
+header b{font-size:18px} header small{display:block;color:var(--mut);font-size:13px;line-height:1.4}
+.ig{margin-right:auto;background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:9px 14px;border-radius:14px;white-space:nowrap}
+h1{font-size:30px;line-height:1.5;margin:30px 4px 8px;font-weight:900} h1 em{font-style:normal;background:rgba(59,111,224,.12);border:2px solid var(--blue);border-radius:6px;padding:0 6px}
+.lead{color:var(--mut);margin:0 4px 18px}
+.pc{background:#111;color:#fff;border-radius:18px;padding:14px 16px;display:flex;gap:12px;align-items:center;font-weight:700;font-size:15px}
+.pc button{margin-right:auto;flex:none}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px 18px;margin-top:18px;box-shadow:0 10px 30px rgba(20,20,50,.06)}
+.step{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.num{width:38px;height:38px;border-radius:12px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;flex:none}
+h2{font-size:21px;font-weight:900}
+p,li{font-size:16px} ol,ul{padding-right:22px;margin:6px 0}
+.dl{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--blue);color:#fff;text-decoration:none;font-weight:900;font-size:19px;border-radius:16px;padding:15px;margin:14px 0 6px}
+.shot{width:100%;border-radius:14px;border:1px solid var(--line);margin-top:12px;display:block}
+.mock{border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px;background:#FBFBF9;direction:ltr;font-family:Inter,system-ui,sans-serif}
+.tabs{display:flex;gap:6px;background:#F0F0EC;border-radius:999px;padding:5px;width:max-content;margin:0 auto} .tabs span{padding:6px 16px;border-radius:999px;color:#888;font-weight:700;font-size:14px} .tabs .on{background:#fff;color:var(--blue);box-shadow:0 2px 6px rgba(0,0,0,.08);outline:2px solid var(--blue)}
+.tip{direction:rtl;text-align:center;font-family:Vazirmatn;font-size:13px;color:var(--blue);font-weight:700;margin-top:8px}
+.allow{display:flex;gap:8px;justify-content:center;margin-top:8px} .allow span{border-radius:10px;padding:6px 12px;font-size:13px;font-weight:700;border:1px solid #ddd;background:#fff} .allow .hl{background:var(--blue);color:#fff;border-color:var(--blue)}
+.prompt{border:2px solid var(--blue);border-radius:20px;overflow:hidden;margin-top:14px}
+.ph{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#EEF3FD}
+.tag{background:var(--blue);color:#fff;border-radius:8px;padding:0 10px;font-weight:900;font-size:14px}
+.ph b{font-size:17px}
+button.copy{margin-right:auto;border:0;background:var(--blue);color:#fff;font-family:inherit;font-weight:900;font-size:15px;padding:9px 16px;border-radius:12px;cursor:pointer}
+button.copy.ok{background:#1E9E57}
+pre{white-space:pre-wrap;font-family:inherit;font-size:14px;line-height:1.9;padding:14px;max-height:260px;overflow:auto;background:#fff}
+.note{background:#FFF7EC;border:1px solid #F4DDBB;border-radius:16px;padding:12px 14px;margin-top:12px;font-size:15px}
+footer{text-align:center;color:var(--mut);font-size:14px;margin-top:34px} footer a{color:var(--blue);font-weight:800;text-decoration:none}
+.gh{display:inline-flex;gap:8px;align-items:center;background:#111;color:#fff!important;padding:9px 16px;border-radius:12px;margin-top:10px}
+</style></head><body><div class="wrap">
+<header><img src="avatar.png" alt="Reza Karimi"><div><b>Reza Karimi</b><small>هوش مصنوعی، ساده و کاربردی</small></div><a class="ig" href="https://instagram.com/rezakarimiai" target="_blank" rel="noopener">فالو در اینستاگرام</a></header>
+
+<h1>استودیوی ادیت ویدیو با <em>Claude</em>، رایگان و بدون نصب دستی</h1>
+<p class="lead">سه قدم ساده. همه‌ی ابزارها رو خود Claude نصب می‌کنه؛ تو فقط کپی و پیست می‌کنی.</p>
+
+<div class="pc">💻 Claude دسکتاپ روی کامپیوتر نصب می‌شه. اگه الان با گوشی اینجایی، لینک این صفحه رو برای خودت بفرست و روی کامپیوترت بازش کن.<button class="copy" data-copy="link">کپی لینک</button></div>
+
+<div class="card"><div class="step"><span class="num">۱</span><h2>Claude دسکتاپ رو نصب کن</h2></div>
+<p>از سایت رسمی Claude نسخه‌ی ویندوز یا مک رو دانلود و نصب کن، بعد با اکانتت وارد شو.</p>
+<a class="dl" href="https://claude.ai/download" target="_blank" rel="noopener">⬇ دانلود Claude دسکتاپ</a>
+<img class="shot" src="download.png" alt="صفحه‌ی دانلود Claude دسکتاپ" onerror="this.remove()">
+</div>
+
+<div class="card"><div class="step"><span class="num">۲</span><h2>پوشه بساز و به Claude وصلش کن</h2></div>
+<ol><li>روی دسکتاپ یه پوشه‌ی خالی بساز به اسم <b dir="ltr">AI Video Editor</b>.</li>
+<li>توی Claude دسکتاپ، بالای صفحه برو روی تب <b>Code</b>.</li>
+<li>یه چت جدید باز کن، <b>Local</b> رو انتخاب کن و همون پوشه رو انتخاب کن.</li></ol>
+<div class="mock"><div class="tabs"><span>Chat</span><span>Cowork</span><span class="on">Code</span></div><div class="tip">← تب Code</div>
+<div class="tabs" style="margin-top:12px"><span>☁ Cloud</span><span class="on">💻 Local</span></div><div class="tip">← Local، بعد پوشه‌ی AI Video Editor</div></div>
+<div class="note">🔐 <b>اجازه دادن:</b> Claude موقع نصب ابزارها می‌پرسه «اجازه می‌دی؟». روی <b>Allow</b> بزن (یا گزینه‌ی همیشه اجازه بده). اگه ویندوز پنجره‌ای باز کرد و پرسید، <b>Yes</b> رو بزن. روی مک ممکنه یک بار رمز کامپیوترت رو بخواد.
+<div class="mock" style="margin-top:8px"><div class="allow"><span>Deny</span><span class="hl">Allow</span></div></div></div>
+</div>
+
+<div class="card"><div class="step"><span class="num">۳</span><h2>سه تا پرامپت، به ترتیب</h2></div>
+<p>هر پرامپت رو کپی کن، توی همون چت Claude پیست کن و Enter بزن. هر جا Claude سؤال پرسید، فارسی جوابش رو بده.</p>
+<div class="prompt"><div class="ph"><span class="tag">پرامپت ۱</span><b>نصب همه‌چیز</b><button class="copy" data-copy="p1">کپی</button></div><pre id="p1">سلام Claude! می‌خوام همین پوشه رو به یه استودیوی ادیت ویدیو تبدیل کنی که باهاش ریلز اینستاگرام ادیت کنیم.
+
+من برنامه‌نویس نیستم، پس این قانون‌ها رو همیشه رعایت کن:
+- با من فارسی و خیلی ساده حرف بزن.
+- هیچ دستوری رو از من نخواه که خودم تایپ کنم؛ همه‌چیز رو خودت نصب و اجرا کن.
+- قبل از هر کاری که اجازه لازم داره، توی یه جمله‌ی ساده بگو برای چیه.
+- اگه جایی واقعاً کار من لازمه (مثلاً زدن Yes توی پنجره‌ی ویندوز، یا وارد کردن رمز کامپیوتر توی مک)، دقیق بگو کجا و چی رو بزنم.
+- اگه خطا دیدی، خودت علتش رو پیدا کن و راه دیگه‌ای امتحان کن؛ فقط وقتی همه‌ی راه‌ها بسته شد از من کمک بخواه.
+
+کارهایی که باید انجام بدی:
+
+۱. سیستم‌عامل و کارت گرافیک منو تشخیص بده (Windows یا macOS؛ کارت NVIDIA، تراشه‌ی Apple Silicon، یا هیچ‌کدوم).
+
+۲. داخل همین پوشه این زیرپوشه‌ها رو بساز (اگه از قبل هستن، بهشون دست نزن):
+   Raw Footage (فیلم‌های خام من)، References (ویدیوهای رفرنس)، Exports (خروجی‌ها)، و یه پوشه به اسم .studio برای ابزارها و پروژه‌ها.
+
+۳. این ابزارها رو نصب کن. اگه چیزی از قبل نصبه، فقط نسخه‌ش رو چک کن و رد شو. روی ویندوز از winget استفاده کن؛ روی مک از Homebrew (اگه Homebrew نصب نیست، اول اون رو نصب کن).
+   - Node.js نسخه‌ی ۲۲ یا بالاتر
+   - Python نسخه‌ی ۳.۱۱ یا ۳.۱۲
+   - FFmpeg
+   - yt-dlp
+   - Whisper برای زیرنویس فارسی: حتماً نسخه‌ی چندزبانه (multilingual) رو نصب کن، نه مدل‌های .en که فقط انگلیسی‌ان. faster-whisper رو داخل یه محیط مجازی پایتون توی .studio نصب کن. اگه کارت NVIDIA دارم، مدل large-v3 رو روی GPU بذار (بهترین دقت برای فارسی). اگه GPU کار نکرد یا ندارم، مدل large-v3-turbo رو با int8 روی CPU استفاده کن. روی مک‌های Apple Silicon، mlx-whisper با مدل large-v3-turbo سریع‌تره. زبان رو همیشه fa بذار و زمان‌بندی کلمه‌به‌کلمه (word timestamps) رو روشن کن. مدل رو همین الان یک بار دانلود کن که موقع ادیت منتظر نمونم.
+   - HyperFrames (ساخت ویدیو و موشن‌گرافیک با HTML): مهارت‌های رسمیش رو برای خودت نصب کن با npx skills add heygen-com/hyperframes. اگه خطای git-lfs داد، Git LFS رو نصب کن و دوباره امتحان کن. بعد یه پروژه با npx hyperframes init داخل .studio/hyperframes بساز.
+   - Remotion (ساخت ویدیو با کد): یه پروژه‌ی خالی Remotion داخل .studio/remotion بساز. اگه مهارت‌های رسمی Remotion برای Claude موجوده، اون‌ها رو هم نصب کن.
+   - فونت فارسی Vazirmatn رو دانلود کن و بذار توی .studio/fonts برای زیرنویس‌ها.
+
+۴. بعد از هر نصب، اگه ابزار هنوز پیدا نمی‌شه، مسیر کاملش رو پیدا کن و از همون استفاده کن، به‌جای اینکه از من بخوای کامپیوتر رو ری‌استارت کنم.
+
+۵. همه‌چیز رو تست کن:
+   - نسخه‌ی هر ابزار رو چک کن.
+   - مطمئن شو مدل Whisper لود می‌شه.
+   - با HyperFrames یه ویدیوی ۳ ثانیه‌ای عمودی (۱۰۸۰×۱۹۲۰) بساز که روش با فونت Vazirmatn نوشته «استودیوی ادیت من آماده‌ست ✅» و بذارش توی Exports به اسم test.mp4.
+
+۶. یه فایل CLAUDE.md توی همین پوشه بنویس که دفعه‌های بعد بدونی اینجا چه خبره:
+   - سیستم من، مسیر هر ابزار، و اینکه کدوم مدل Whisper انتخاب شد
+   - نقشه‌ی پوشه‌ها
+   - قانون‌ها: همیشه فارسی و ساده حرف بزن؛ هیچ‌وقت فایل‌های داخل Raw Footage رو تغییر نده یا پاک نکن؛ خروجی‌ها رو همیشه با اسم نسخه‌دار (v1، v2، …) توی Exports بذار؛ قبل از هر ادیت، taste.md رو بخون.
+
+۷. در آخر یه گزارش کوتاه فارسی بده: چی نصب شد، چی از قبل بود، و چیزی مونده یا نه. بگو test.mp4 رو توی Exports باز کنم ببینم.</pre></div>
+<div class="prompt"><div class="ph"><span class="tag">پرامپت ۲</span><b>یاد گرفتن سلیقه‌ی تو</b><button class="copy" data-copy="p2">کپی</button></div><pre id="p2">حالا می‌خوام سلیقه‌ی ادیت منو یاد بگیری. اول CLAUDE.md رو بخون.
+
+۱. ازم بخواه ۳ تا ۵ لینک از ویدیوهایی که استایل ادیتشون رو دوست دارم بفرستم (اینستاگرام، یوتیوب یا تیک‌تاک). صبر کن تا بفرستم.
+
+۲. با yt-dlp دانلودشون کن توی References. اگه اینستاگرام اجازه نداد، با اجازه‌ی من از کوکی‌های مرورگرم استفاده کن (--cookies-from-browser). اگه بازم نشد، ازم بخواه خودم فایل ویدیو رو بندازم توی References.
+
+۳. هر ویدیو رو دقیق بررسی کن:
+   - با FFmpeg کات‌ها رو تشخیص بده و هر نیم ثانیه یه فریم دربیار؛ فریم‌ها رو خودت نگاه کن.
+   - با Whisper متن هر ویدیو رو دربیار.
+   - اندازه بگیر و یادداشت کن: طول ویدیو؛ میانگین فاصله‌ی کات‌ها؛ هوک ۳ ثانیه‌ی اول؛ استایل زیرنویس (جا، اندازه، رنگ، فونت، کلمه‌به‌کلمه یا جمله‌ای)؛ رنگ‌ها؛ زوم‌ها، حرکت‌ها و ترنزیشن‌ها؛ b-roll و گرافیک‌ها؛ موزیک و افکت‌های صوتی؛ ریتم کلی.
+
+۴. یه فایل taste.md توی همین پوشه بنویس، با قانون‌های مشخص و قابل‌اجرا (با عدد و مثال، نه کلی‌گویی). مثلاً: «تقریباً هر ۱.۸ ثانیه یه کات یا زوم»، «زیرنویس کلمه‌به‌کلمه، سفید با کادر نیمه‌شفاف، وسط پایین تصویر».
+
+۵. این قانون رو بالای taste.md بنویس و توی همه‌ی ادیت‌ها رعایتش کن:
+   «از این ویدیوها الهام بگیر، کپی نکن. حس، ریتم و ساختارشون رو بگیر، ولی طراحی، متن، موزیک و هویت بصریشون رو عیناً تکرار نکن. چهره، صدا و برند من باید مال خودم بمونه.»
+
+۶. سلیقه‌ی منو در ۵ خط فارسی خلاصه کن و بپرس چیزی رو عوض کنم یا نه. هر تغییری گفتم، توی taste.md اعمال کن.</pre></div>
+<div class="prompt"><div class="ph"><span class="tag">پرامپت ۳</span><b>ادیت</b><button class="copy" data-copy="p3">کپی</button></div><pre id="p3">یه فیلم خام جدید گذاشتم توی Raw Footage. ادیتش کن. اول CLAUDE.md و taste.md رو بخون.
+
+۱. جدیدترین ویدیوی داخل Raw Footage رو پیدا کن. به فایل اصلی دست نزن؛ فقط ازش بخون.
+
+۲. با Whisper (زبان fa، زمان‌بندی کلمه‌به‌کلمه) متن ویدیو رو دربیار.
+
+۳. سکوت‌ها، مکث‌های طولانی و صداهایی مثل «اِ» و «امم» رو ببُر. اگه یه جمله رو چند بار گفتم، فقط آخرین نسخه‌ی کامل و خوبش رو نگه دار.
+
+۴. ویدیو رو عمودی ۱۰۸۰×۱۹۲۰ با ۳۰ فریم در ثانیه بساز، با HyperFrames یا Remotion (هرکدوم برای این کار بهتره):
+   - زیرنویس فارسی کلمه‌به‌کلمه، راست‌به‌چپ، با فونت Vazirmatn و با استایل taste.md
+   - زیرنویس و نوشته‌ها رو از ۱۲٪ بالای تصویر و ۲۰٪ پایینش دور نگه دار (اونجا رو دکمه‌های اینستاگرام می‌پوشونن)
+   - زوم‌ها، b-roll، گرافیک‌ها و افکت‌ها طبق taste.md
+   - موزیک: اگه توی References یه فایل صوتی هست که اسمش music داره، بذارش زیر صدای من و موقع حرف زدن آرومش کن. اگه نیست، بدون موزیک خروجی بگیر و بگو موقع پست کردن از موزیک‌های خود اینستاگرام اضافه کنم.
+   - صدا رو یکدست و تمیز کن (بلندی حدود ‎-14 LUFS).
+
+۵. خروجی رو با اسم نسخه‌دار بذار توی Exports (مثلاً edit_v1.mp4) و کنارش یه یادداشت کوتاه بذار که چه کارهایی کردی.
+
+۶. بهم بگو ویدیو آماده‌ست و منتظر نظرم بمون. هر بازخوردی دادم (مثلاً «زیرنویسو بزرگ‌تر کن»)، اعمالش کن و نسخه‌ی بعدی (v2، v3، …) رو بساز. اگه بازخوردم یه سلیقه‌ی ثابته (نه فقط مخصوص همین ویدیو)، به taste.md اضافه‌ش کن.</pre></div>
+<div class="note">🎬 برای ادیت‌های بعدی: فیلم خام رو بنداز توی پوشه‌ی <b dir="ltr">Raw Footage</b> و فقط پرامپت ۳ رو دوباره بفرست.</div>
+</div>
+
+<div class="card"><div class="step"><span class="num">؟</span><h2>اگه جایی گیر کردی</h2></div>
+<ul><li>هر خطایی دیدی، همون رو برای Claude بفرست و بنویس «درستش کن».</li>
+<li>نصب بار اول ممکنه ۱۰ تا ۳۰ دقیقه طول بکشه (دانلود مدل زیرنویس فارسی). صبور باش و Claude رو نبند.</li>
+<li>برای دانلود ابزارها اینترنت بدون محدودیت لازمه.</li></ul></div>
+
+<footer>ساخته‌شده با ❤️ توسط <a href="https://instagram.com/rezakarimiai" target="_blank" rel="noopener">@rezakarimiai</a><br>
+<a class="gh" href="https://github.com/Reza-data" target="_blank" rel="noopener">⭐ پروژه‌های من در GitHub</a></footer>
+</div>
+<script>
+document.querySelectorAll('button.copy').forEach(b=>b.addEventListener('click',async()=>{
+  const k=b.dataset.copy;const txt=k==='link'?location.href:document.getElementById(k).innerText;
+  try{await navigator.clipboard.writeText(txt);}catch(e){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+  const o=b.textContent;b.textContent='✓ کپی شد';b.classList.add('ok');setTimeout(()=>{b.textContent=o;b.classList.remove('ok')},1800);}));
+</script></body></html>
